@@ -22,16 +22,28 @@ const compareGuesses = (userGuess, computerGuess, targetNumber) => {
     return false;
   }
 };
+console.log(compareGuesses(3,6,targetNumber));
+
+let winner;
+if (compareGuesses(userGuess, computerGuess, targetNumber)) {
+  winner = 'human';
+} else {
+  winner = 'computer';
+}
 
 // updateScore() add a point to the winner's score
 const updateScore = (winner) => {
     if (winner === 'human') {
       humanScore++;
-      console.log(humanScore);
+      console.log(`human score is : ${humanScore}`);
     } else {
       computerScore++;
+      console.log(`computer score is : ${computerScore}`);
     }
   };
   
+  const advanceRound = () => {
+    currentRoundNumber++;
+  };
 
 
