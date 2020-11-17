@@ -2,17 +2,17 @@ let humanScore = 0;
 let computerScore = 0;
 let currentRoundNumber = 1;
 
-// Generate a new target number
+// Generate a new target number between 0 and 9
 const generateTarget = () => {
-    const randomTarget = Math.floor(Math.random() * 10);
-    return randomTarget;
+    return Math.floor(Math.random() * 10);
 };
 
-// compareGuesses() determines which player is the closest to the target number
+// declaration of the variables needed parameters in compareGuesses()
 let userGuess;
-let computerGuess;
+const computerGuess = generateTarget();
 const targetNumber = generateTarget();
 
+// compareGuesses() determines which player is the closest to the target number
 const compareGuesses = (userGuess, computerGuess, targetNumber) => {
   if (Math.abs(targetNumber-userGuess) <= Math.abs(targetNumber-computerGuess)) {
     //player won
@@ -22,7 +22,6 @@ const compareGuesses = (userGuess, computerGuess, targetNumber) => {
     return false;
   }
 };
-console.log(compareGuesses(3,6,targetNumber));
 
 let winner;
 if (compareGuesses(userGuess, computerGuess, targetNumber)) {
@@ -42,6 +41,7 @@ const updateScore = (winner) => {
     }
   };
   
+  // add 1 to the round number
   const advanceRound = () => {
     currentRoundNumber++;
   };
