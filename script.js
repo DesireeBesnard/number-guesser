@@ -1,3 +1,12 @@
+/*
+8: initialization
+58: fonctions needed
+92: game session
+132: next round
+*/
+
+// START INITIALIZATION
+
 let currentRoundNumber = 1;
 const roundNumberDisplay = document.getElementById('round-number');
 
@@ -44,8 +53,9 @@ humanGuessInput.addEventListener('input', function(e) {
 
 const guessButton = document.getElementById('guess');
 
+// END INITIALIZATION
 
-
+// START FONCTIONS NEEDED
 
 // Generate a new target number between 0 and 9
 const generateTarget = () => {
@@ -77,66 +87,72 @@ const updateScore = (winner) => {
     currentRoundNumber++;
   };
 
+// END FONCTIONS NEEDED
 
+// START GAME SESSION 
 
-  guessButton.addEventListener('click', () => {
-    // Generate the target value
-    targetNumber = generateTarget();
-     // Make a random 'computer guess'
-     const computerGuess = generateTarget();
-    // Retrieve the player's guess
-    const humanGuess = humanGuessInput.value;
-  
-    // Display the computer guess and the target
-    targetNumberDisplay.innerText = targetNumber;
-    computerGuessDisplay.innerText = computerGuess;
-    
-    // Determine if the human or computer wins:
-    const humanIsWinner = compareGuesses(humanGuess, computerGuess, targetNumber );
-    let winner;
+guessButton.addEventListener('click', () => {
+  // Generate the target value
+  targetNumber = generateTarget();
+   // Make a random 'computer guess'
+   const computerGuess = generateTarget();
+  // Retrieve the player's guess
+  const humanGuess = humanGuessInput.value;
 
-    if (humanIsWinner) {
-      winner = 'human';
-      guessButton.innerText = 'You Win!!!!!';
-      guessButton.classList.toggle('winning-text');
-    } else {
-      winner = 'computer';
-      computerWinsDisplay.innerText = 'Computer Wins!!!';
-    }
+  // Display the computer guess and the target
+  targetNumberDisplay.innerText = targetNumber;
+  computerGuessDisplay.innerText = computerGuess;
   
-    // Update the correct score:
-    updateScore(winner);
-  
-    // winnerDisplay.innerText = humanIsWinner ? 'You win!' : 'Computer wins!';
-  
-    // Display the current scores:
-    humanScoreDisplay.innerText = humanScore;
-    computerScoreDisplay.innerText = computerScore;
-    
-    // Set the correct disabled state for the buttons
-    guessButton.setAttribute('disabled', true)
-    nextRoundButton.removeAttribute('disabled');
-  });
-  
-  
+  // Determine if the human or computer wins:
+  const humanIsWinner = compareGuesses(humanGuess, computerGuess, targetNumber );
+  let winner;
 
-  nextRoundButton.addEventListener('click', () => {
-    // Increase the round number
-    advanceRound();
-    // Display the new round number
-    roundNumberDisplay.innerText = currentRoundNumber;
+  if (humanIsWinner) {
+    winner = 'human';
+    guessButton.innerText = 'You Win!!!!!';
+    guessButton.classList.toggle('winning-text');
+  } else {
+    winner = 'computer';
+    computerWinsDisplay.innerText = 'Computer Wins!!!';
+  }
+
+  // Update the correct score:
+  updateScore(winner);
+
+  // winnerDisplay.innerText = humanIsWinner ? 'You win!' : 'Computer wins!';
+
+  // Display the current scores:
+  humanScoreDisplay.innerText = humanScore;
+  computerScoreDisplay.innerText = computerScore;
   
-    // Set the correct disabled state for the buttons
-    nextRoundButton.setAttribute('disabled', true);
-    guessButton.removeAttribute('disabled');
+  // Set the correct disabled state for the buttons
+  guessButton.setAttribute('disabled', true)
+  nextRoundButton.removeAttribute('disabled');
+});
   
-    // Reset the guess input box and the target number display:
-    targetNumberDisplay.innerText = '?';
-    guessButton.innerText = 'Make a Guess';
-    humanGuessInput.value = '';
-    computerGuessDisplay.innerText = '?';
-    computerWinsDisplay.innerText = '';
-    guessButton.classList.remove('winning-text');
-  });
+// END GAME SESSION 
+
+// START NEXT ROUND
+
+nextRoundButton.addEventListener('click', () => {
+  // Increase the round number
+  advanceRound();
+  // Display the new round number
+  roundNumberDisplay.innerText = currentRoundNumber;
+
+  // Set the correct disabled state for the buttons
+  nextRoundButton.setAttribute('disabled', true);
+  guessButton.removeAttribute('disabled');
+
+  // Reset the guess input box and the target number display:
+  targetNumberDisplay.innerText = '?';
+  guessButton.innerText = 'Make a Guess';
+  humanGuessInput.value = '';
+  computerGuessDisplay.innerText = '?';
+  computerWinsDisplay.innerText = '';
+  guessButton.classList.remove('winning-text');
+});
+
+// END NEXT ROUND
 
 
