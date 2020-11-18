@@ -40,6 +40,8 @@ const handleValueChange = value => {
   if (value > 0 && value <= 8) {
     subtractButton.removeAttribute('disabled');
     addButton.removeAttribute('disabled');
+  } else if (value < 0 || value > 9) {
+    window.alert(('This number is out of range. It should be between 0 and 9'));
   } else if (value >= 9) {
     addButton.setAttribute('disabled', true);
   } else if (value <= 0) {
